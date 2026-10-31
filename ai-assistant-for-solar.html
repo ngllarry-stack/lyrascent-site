@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Assistant for Solar Installers | Lyrascent</title>
+<meta name="description" content="An AI front desk for solar installers: answers first questions, checks your service area and hands you callback requests. Free demo for early members.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://lyrascent.com/ai-assistant-for-solar.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Assistant for Solar Installers | Lyrascent">
+<meta property="og:description" content="An AI front desk for solar installers: answers first questions, checks your service area and hands you callback requests. Free demo for early members.">
+<meta property="og:url" content="https://lyrascent.com/ai-assistant-for-solar.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%230A1330%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27%232F6BFF%27/%3E%3C/svg%3E">
+<style>
+:root{
+  --navy:#0A1330; --navy-2:#111C42; --navy-3:#1A2756;
+  --blue:#2E6AFF; --ice:#8FB4FF;
+  --platinum:#E6E9F0; --silver:#A9B1C3; --mist:#F4F6FB; --ink:#0A1330; --ink-soft:#33405F;
+  --gutter:clamp(16px,3vw,40px);
+  --display:"Sora","Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --text:"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);font-size:18px;line-height:1.55;color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ice);outline-offset:3px}
+.wrap{padding-inline:var(--gutter)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.03em;line-height:1.02}
+.dark{background:var(--navy);color:var(--platinum)}
+.light{background:var(--mist);color:var(--ink)}
+.mid{background:var(--platinum);color:var(--ink)}
+section{padding-block:clamp(72px,11vw,170px)}
+
+.preview{background:var(--blue);color:#fff;text-align:center;padding:10px var(--gutter);font:600 15px/1.35 var(--text)}
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px var(--gutter);background:var(--navy);color:var(--platinum)}
+.nav a{text-decoration:none}
+.nav .links{display:flex;align-items:center;gap:clamp(16px,3vw,36px);font-size:16px}
+.nav .links a.plain:hover{color:#fff}
+@media(max-width:600px){.nav .links a.plain{display:none}}
+.wm{display:block;width:clamp(120px,14vw,168px);height:auto;color:var(--platinum)}
+.wm .dot{fill:var(--blue)}
+
+/* buttons: flat, square */
+.btn{display:inline-block;background:var(--blue);color:#fff;font:600 17px/1 var(--text);padding:18px 26px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s ease,background-color .15s ease}
+.btn:hover{background:#2358E0;transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn.sm{padding:13px 18px;font-size:16px}
+.btn.on-light{background:var(--navy)}
+.btn.on-light:hover{background:var(--navy-3)}
+
+/* hero */
+.hero{padding-block:clamp(48px,8vw,110px) clamp(64px,9vw,130px)}
+.hero h1{font-size:clamp(34px,8.2vw,128px);letter-spacing:-.04em;line-height:.98;color:var(--platinum);max-width:14ch}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(36px,5vw,72px);margin-top:clamp(36px,5vw,72px);align-items:start}
+@media(min-width:900px){.hero-grid{grid-template-columns:5fr 6fr}}
+.hero p.lead{font-size:clamp(19px,1.7vw,24px);line-height:1.45;color:var(--platinum);max-width:34ch}
+.hero .cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+.hero .cta span{color:var(--silver);font-size:16px}
+
+/* product fragments (their own styling) */
+[data-ui]{background:var(--navy-2);color:var(--platinum);padding:clamp(18px,2.4vw,32px);font-size:16px}
+.msg{padding:14px 18px;max-width:86%;margin-top:12px;line-height:1.45}
+.msg.v{background:var(--navy-3);color:var(--platinum);border-radius:4px 18px 18px 18px}
+.msg.a{background:var(--blue);color:#fff;margin-left:auto;border-radius:18px 4px 18px 18px}
+.who{color:var(--silver);font-size:14px;margin-top:18px}
+.who.r{text-align:right}
+.frag-note{margin-top:20px;color:var(--silver);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--navy-3);color:var(--ice);padding:7px 12px;font-size:14.5px;border-radius:99px}
+
+/* what it handles */
+.handles h2{font-size:clamp(34px,6vw,88px);max-width:16ch}
+.handles .grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,5vw,64px) clamp(32px,6vw,96px);margin-top:clamp(40px,6vw,88px)}
+@media(min-width:800px){.handles .grid{grid-template-columns:1fr 1fr}}
+.handles h3{font-size:clamp(24px,2.6vw,36px);margin-bottom:12px}
+.handles p{color:var(--ink-soft);max-width:40ch}
+
+/* websites */
+.sites h2{font-size:clamp(34px,6vw,88px);max-width:16ch}
+.sites .lead{margin-top:24px;max-width:46ch;font-size:clamp(18px,1.6vw,22px);color:var(--ink-soft)}
+.sites .grid{display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,56px) clamp(32px,6vw,96px);margin-top:clamp(40px,6vw,80px)}
+@media(min-width:800px){.sites .grid{grid-template-columns:repeat(3,1fr)}}
+.sites h3{font-size:clamp(24px,2.4vw,32px);margin-bottom:12px}
+.sites p.t{color:var(--ink-soft);max-width:34ch}
+
+/* live */
+.live{background:var(--navy);color:var(--platinum)}
+.live h2{font-size:clamp(34px,6vw,88px);max-width:16ch}
+.live .lead{margin-top:24px;max-width:46ch;font-size:clamp(18px,1.6vw,22px);color:var(--platinum)}
+.live-grid{display:grid;gap:clamp(32px,5vw,72px);margin-top:clamp(40px,5vw,72px);grid-template-columns:1fr}
+@media(min-width:900px){.live-grid{grid-template-columns:4fr 7fr;align-items:start}}
+.tabs{display:flex;flex-direction:column;gap:10px}
+.tabs button{font:600 clamp(20px,2vw,28px)/1.1 var(--display);letter-spacing:-.02em;text-align:left;background:var(--navy-2);color:var(--platinum);border:0;padding:22px 24px;cursor:pointer;transition:background-color .15s ease,transform .15s ease}
+.tabs button:hover{background:var(--navy-3);transform:translateX(4px)}
+.tabs button[aria-selected="true"]{background:var(--blue);color:#fff}
+.demo+.demo{margin-top:32px}
+.js .demo[hidden]{display:none}
+.demo h3{font-size:18px;font-family:var(--text);letter-spacing:0;font-weight:500;color:var(--silver);margin-bottom:6px;line-height:1.3}
+
+/* how it starts */
+.start h2{font-size:clamp(34px,6vw,88px);max-width:14ch}
+.steps{margin-top:clamp(40px,6vw,88px);display:grid;gap:clamp(32px,4vw,56px)}
+.step{display:grid;gap:12px 48px;grid-template-columns:1fr}
+@media(min-width:800px){.step{grid-template-columns:1fr 1fr;align-items:baseline}}
+.step h3{font-size:clamp(26px,3.6vw,52px)}
+.step p{max-width:44ch;color:var(--ink-soft)}
+
+/* weekly */
+.weekly{display:grid;gap:clamp(36px,5vw,80px);grid-template-columns:1fr;align-items:center}
+@media(min-width:900px){.weekly{grid-template-columns:6fr 5fr}}
+.weekly h2{font-size:clamp(34px,5.4vw,80px);max-width:12ch}
+.weekly p{margin-top:24px;max-width:42ch;font-size:clamp(18px,1.5vw,21px)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:20px 16px;margin-top:8px}
+.stat b{display:block;font:600 clamp(40px,5vw,64px)/1 var(--display);letter-spacing:-.04em;color:#fff}
+.stat span{color:var(--silver);font-size:15.5px}
+.rep-title{font:600 20px/1.2 var(--display);letter-spacing:-.02em}
+
+/* pricing */
+.price h2{font-size:clamp(34px,6vw,88px);max-width:16ch}
+.pgrid{display:grid;gap:clamp(36px,5vw,80px);margin-top:clamp(40px,6vw,80px);grid-template-columns:1fr}
+@media(min-width:800px){.pgrid{grid-template-columns:1fr 1fr}}
+.big{font:600 clamp(48px,7vw,104px)/1 var(--display);letter-spacing:-.05em}
+.big small{font:500 clamp(18px,1.6vw,22px)/1.3 var(--text);letter-spacing:0;color:var(--ink-soft);display:block;margin-top:12px}
+.pgrid p{margin-top:16px;max-width:40ch;color:var(--ink-soft)}
+.fine{margin-top:clamp(32px,4vw,56px);max-width:62ch;color:var(--ink-soft);font-size:16.5px}
+
+/* careful */
+.careful h2{font-size:clamp(34px,6vw,88px);max-width:15ch}
+.careful ul{list-style:none;padding:0;margin-top:clamp(40px,5vw,72px);display:grid;gap:28px clamp(32px,6vw,96px);grid-template-columns:1fr}
+@media(min-width:800px){.careful ul{grid-template-columns:1fr 1fr}}
+.careful li{font-size:clamp(19px,1.7vw,24px);line-height:1.4;max-width:32ch}
+.careful li b{display:block;font:600 clamp(22px,2.2vw,30px)/1.15 var(--display);letter-spacing:-.02em;color:#fff;margin-bottom:8px}
+
+/* close */
+.close{padding-block:clamp(72px,10vw,150px) 40px}
+.close h2{font-size:clamp(34px,6.4vw,96px);max-width:15ch;color:var(--platinum)}
+.close .row{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;margin-top:36px}
+.close .row a.mail{font-size:19px}
+.wl{display:grid;grid-template-columns:1fr;gap:18px 24px;margin-top:36px;max-width:820px}
+@media(min-width:760px){.wl{grid-template-columns:1fr 1fr}.wl .wide{grid-column:1/-1}}
+.wl label{display:flex;flex-direction:column;gap:8px;font-size:16px;color:var(--platinum)}
+.wl input:not([type=checkbox]),.wl select,.wl textarea{font:400 17px/1.3 var(--text);padding:14px 16px;border:0;background:var(--navy-2);color:var(--platinum);border-radius:0;width:100%}
+.wl select{appearance:auto}
+.wl input:focus,.wl select:focus,.wl textarea:focus{outline:3px solid var(--ice);outline-offset:0}
+.wl .check{flex-direction:row;align-items:flex-start;gap:12px;font-size:15.5px;color:var(--silver)}
+.wl .check input{margin-top:4px;width:20px;height:20px;flex:none}
+.wl .check a{color:var(--ice)}
+.wl-msg{font-size:17px;color:var(--ice);min-height:1.4em}
+.big-wm{margin-top:clamp(56px,9vw,140px);width:100%;height:auto;color:var(--platinum)}
+.big-wm .dot{fill:var(--blue)}
+.legal{margin-top:36px;color:var(--silver);font-size:15px;display:flex;flex-wrap:wrap;gap:8px 28px}
+
+/* demo chat and replay */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pick button{font:600 15px/1 var(--text);background:var(--navy-3);color:var(--platinum);border:0;padding:12px 16px;cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--blue);color:#fff}
+#chat-log{margin-top:8px;min-height:140px;max-height:380px;overflow:auto;padding-right:4px}
+#chat-form{display:flex;gap:10px;margin-top:16px}
+#chat-input{flex:1;min-width:0;font:400 17px/1.3 var(--text);padding:14px 16px;border:0;background:var(--navy-3);color:var(--platinum);border-radius:0}
+#chat-input::placeholder{color:var(--silver)}
+#chat-input:focus{outline:3px solid var(--ice);outline-offset:0}
+#chat-form .btn[disabled],#chat-input[disabled]{opacity:.6;cursor:not-allowed}
+.msg p+p{margin-top:8px}
+.msg .urgent{display:inline-block;margin-top:8px;background:var(--navy);color:var(--ice);padding:4px 10px;font-size:13.5px;border-radius:99px}
+.replay-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px}
+.replay-bar .btn{font-size:15px}
+
+/* motion */
+.js .rise{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .btn,.tabs button{transition:none}
+}
+
+.faq{margin-top:clamp(40px,5vw,72px);display:grid;gap:32px clamp(32px,6vw,96px);grid-template-columns:1fr}
+@media(min-width:800px){.faq{grid-template-columns:1fr 1fr}}
+.faq h3{font-size:clamp(22px,2.2vw,30px);margin-bottom:10px}
+.faq p{color:var(--ink-soft);max-width:44ch}
+.trade h2{font-size:clamp(34px,6vw,88px);max-width:16ch}
+.trade .lead{margin-top:24px;max-width:50ch;font-size:clamp(18px,1.6vw,22px);color:var(--ink-soft)}
+.links-list{list-style:none;padding:0;margin-top:clamp(32px,4vw,56px);display:grid;gap:14px 32px;grid-template-columns:1fr}
+@media(min-width:700px){.links-list{grid-template-columns:1fr 1fr}}
+.links-list a{font:600 clamp(20px,2vw,26px)/1.2 var(--display);letter-spacing:-.02em;color:var(--navy);text-underline-offset:5px}
+.crumbs{padding:18px var(--gutter) 0;background:var(--navy);color:var(--silver);font-size:15px}
+.crumbs a{color:var(--silver)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can it quote savings or tax credits?", "acceptedAnswer": {"@type": "Answer", "text": "No. Savings and incentives depend on the home and the rules, so it passes the question to you."}}, {"@type": "Question", "name": "Can it collect roof or electric bill details?", "acceptedAnswer": {"@type": "Answer", "text": "Only the questions you approve. You decide what your callback needs to start well."}}, {"@type": "Question", "name": "Will it book a site visit?", "acceptedAnswer": {"@type": "Answer", "text": "It takes a visit request with a preferred time. You confirm."}}, {"@type": "Question", "name": "How do we start?", "acceptedAnswer": {"@type": "Answer", "text": "Join the waitlist. We build a free demo from your service area, process and the questions homeowners ask most. We are not taking payments yet."}}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lyrascent-wm" viewBox="-40 -50 580 160">
+    <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path transform="translate(0,0)" d="M0 0 V60 H36"/>
+      <path transform="translate(60,0)" d="M0 0 L20 32 L40 0 M20 32 V60"/>
+      <path transform="translate(120,0)" d="M0 60 V0 H22 a16 16 0 0 1 0 32 H0 M20 32 L38 60"/>
+      <path transform="translate(180,0)" d="M0 60 L20 0 L40 60 M7 40 H33"/>
+      <path transform="translate(240,0)" d="M38 10 C30 -4 4 -2 3 15 C2 30 38 30 37 46 C36 64 8 62 0 50"/>
+      <path transform="translate(300,0)" d="M38 12 C24 -4 2 4 2 30 C2 56 24 64 38 48"/>
+      <path transform="translate(360,0)" d="M38 0 H0 V60 H38 M0 30 H30"/>
+      <path transform="translate(420,0)" d="M0 60 V0 L38 60 V0"/>
+      <path transform="translate(480,0)" d="M0 0 H40 M20 0 V60"/>
+    </g>
+    <circle class="dot" cx="80" cy="-20" r="6"/>
+  </symbol>
+</svg>
+<div class="preview" role="note">Preview version. Lyrascent is not yet open for business and is not taking payments. Join the waitlist below.</div>
+<header class="nav">
+  <a href="index.html" aria-label="Lyrascent home"><svg class="wm" role="img" aria-label="Lyrascent"><use href="#lyrascent-wm"/></svg></a>
+  <nav class="links" aria-label="Main">
+    <a class="plain" href="index.html#handles">What it does</a>
+    <a class="plain" href="#trades">Other trades</a>
+    <a class="btn sm" href="#contact">Join the waitlist</a>
+  </nav>
+</header>
+<main id="top">
+<section class="hero dark wrap" aria-labelledby="h1">
+  <h1 id="h1">A front desk for solar, always on.</h1>
+  <div class="hero-grid">
+    <div>
+      <p class="lead">Homeowners ask the same first questions: do you serve my area, how does it work, can someone call me. Your assistant answers on your website and hands you the ones ready to talk.</p>
+      <div class="cta"><a class="btn" href="#contact">Join the waitlist</a><span>Free demo for early members.</span></div>
+    </div>
+    <div data-ui aria-label="Example conversation">
+      <p class="who">Website visitor</p>
+      <div class="msg v">Do you install solar in 95828? How much would it save me?</div>
+      <p class="who r">Your assistant</p>
+      <div class="msg a">Yes, 95828 is in our service area. I am an AI assistant, so I cannot estimate savings or prices. The owner will go over that with you. What is your name and the best phone or email?</div>
+      <div class="chips"><span class="chip">Lead captured</span><span class="chip">Callback requested</span><span class="chip">Request sent to you</span></div>
+      <p class="frag-note">Example conversation with a made-up business. Your assistant uses your own services, hours and prices.</p>
+    </div>
+  </div>
+</section>
+<section class="handles light wrap" aria-labelledby="h-handles">
+  <h2 id="h-handles">What it handles for solar installers.</h2>
+  <div class="grid">
+    <div><h3>Service area and basics</h3><p>It answers where you install and how the process works, using the wording you approve.</p></div>
+    <div><h3>Questions you choose to ask</h3><p>If you want to know whether they own the home or roughly when they would like to start, it asks. Only what you list.</p></div>
+    <div><h3>Callback requests</h3><p>A preferred day and time, a phone or email, and a note, sent to you.</p></div>
+    <div><h3>Hand-off, not guesses</h3><p>Anything about savings, incentives or contracts goes to you instead of being guessed at.</p></div>
+    <div><h3>Chats in your customers&#x27; languages</h3><p>Visitors can chat in English, Spanish, Vietnamese, Chinese or Tagalog. You get each request in English, with a short summary.</p></div>
+    <div><h3>Every request in your inbox</h3><p>Name, phone or email, what they need and when, in one tidy email, instead of a voicemail you have to decode.</p></div>
+  </div>
+</section>
+<section class="careful dark wrap" aria-labelledby="h-careful">
+  <h2 id="h-careful">What it never does.</h2>
+  <ul>
+    <li><b>It does not estimate savings or payback.</b>Savings depend on the home, and incentives change.</li>
+    <li><b>It does not give tax or financial advice.</b>It points those questions to you.</li>
+    <li><b>It does not promise install dates.</b>It collects a preferred time. You confirm.</li>
+    <li><b>It never pretends to be a person.</b>It says it is an AI assistant.</li>
+  </ul>
+</section>
+<section class="trade mid wrap" aria-labelledby="h-faq">
+  <h2 id="h-faq">Questions solar installers ask.</h2>
+  <div class="faq">
+    <div><h3>Can it quote savings or tax credits?</h3><p>No. Savings and incentives depend on the home and the rules, so it passes the question to you.</p></div>
+    <div><h3>Can it collect roof or electric bill details?</h3><p>Only the questions you approve. You decide what your callback needs to start well.</p></div>
+    <div><h3>Will it book a site visit?</h3><p>It takes a visit request with a preferred time. You confirm.</p></div>
+    <div><h3>How do we start?</h3><p>Join the waitlist. We build a free demo from your service area, process and the questions homeowners ask most. We are not taking payments yet.</p></div>
+  </div>
+  <p class="fine">You approve what your assistant says before it goes live, and you can switch it off at any time. Not taking orders or payments yet.</p>
+</section>
+<section id="trades" class="trade light wrap" aria-labelledby="h-trades">
+  <h2 id="h-trades">Built for other trades too.</h2>
+  <ul class="links-list">
+    <li><a href="ai-assistant-for-hvac.html">AI assistant for HVAC companies</a></li>
+    <li><a href="ai-assistant-for-roofing.html">AI assistant for roofing companies</a></li>
+    <li><a href="ai-assistant-for-cleaning.html">AI assistant for house cleaning businesses</a></li>
+    <li><a href="ai-assistant-for-real-estate.html">AI assistant for real estate agents</a></li>
+  </ul>
+</section>
+<section id="contact" class="close dark wrap" aria-labelledby="h-close">
+  <h2 id="h-close">Join the waitlist for a free solar demo.</h2>
+  <div class="row">
+    <a class="btn" href="index.html#contact">Join the waitlist</a>
+    <a class="mail" href="mailto:hello@lyrascent.com">hello@lyrascent.com</a>
+  </div>
+  <svg class="big-wm" viewBox="-40 -50 580 160" role="img" aria-label="Lyrascent"><use href="#lyrascent-wm"/></svg>
+  <div class="legal"><span>© 2026 Lyrascent. All rights reserved.</span><a href="index.html">Home</a><a href="privacy.html">Privacy notice</a></div>
+</section>
+</main>
+</body>
+</html>
