@@ -368,6 +368,7 @@ section{padding-block:clamp(72px,11vw,170px)}
     </label>
     <label class="wide">What takes up the most time with customer messages? (optional)<textarea name="problem" rows="3"></textarea></label>
     <label class="check wide"><input type="checkbox" name="consent" required><span>I agree that Lyrascent may email me about the waitlist and a free demo. I can unsubscribe at any time. <a href="privacy.html">Privacy notice</a></span></label>
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
     <div class="wide"><button class="btn" type="submit">Join the waitlist</button></div>
     <p class="wl-msg wide" id="wl-msg" role="status" aria-live="polite"></p>
   </form>
@@ -384,8 +385,9 @@ section{padding-block:clamp(72px,11vw,170px)}
 <script>
 (function(){
   var root=document.documentElement; root.classList.add('js');
-  // Waitlist. Set FORM_ENDPOINT to a form service URL before launch. Until then the form opens an email to hello@lyrascent.com.
-  var FORM_ENDPOINT='';
+  // Waitlist. Paste the free Web3Forms access key below (it is public by design) so signups arrive by email automatically.
+  // While it is empty, or if the service is down, the form offers ready-written emails instead.
+  var WEB3_KEY='7f49b4dd-86f6-4843-9fbb-6770f5834317';
   var form=document.getElementById('waitlist'), msg=document.getElementById('wl-msg');
   form.addEventListener('submit',function(e){
     e.preventDefault();
@@ -394,11 +396,17 @@ section{padding-block:clamp(72px,11vw,170px)}
       msg.textContent='Please add your name, a valid email, your business type, what you are interested in, and tick the agreement box.';return;
     }
     var data={name:f.name.value.trim(),email:f.email.value.trim(),business:f.business.value.trim(),type:f.type.value,interest:f.interest.value,problem:f.problem.value.trim(),consent:'yes',page:'lyrascent waitlist'};
-    if(FORM_ENDPOINT){
-      fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)})
-        .then(function(r){if(!r.ok)throw 0;msg.textContent='Thank you. You are on the waitlist.';form.reset()})
-        .catch(function(){msg.textContent='Something went wrong. Please email hello@lyrascent.com.'});
+    if(WEB3_KEY){
+      msg.textContent='Sending...';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3_KEY,subject:'New Lyrascent waitlist signup',from_name:'Lyrascent website',name:data.name,email:data.email,business:data.business,type:data.type,interest:data.interest,problem:data.problem,consent:data.consent,botcheck:f.botcheck.checked})})
+        .then(function(r){return r.json()})
+        .then(function(j){if(!j.success)throw 0;msg.textContent='Thank you, '+data.name.split(' ')[0]+'. You are on the waitlist. We will email you at '+data.email+' about your free demo.';form.reset()})
+        .catch(function(){sendByEmail(data)});
     }else{
+      sendByEmail(data);
+    }
+  });
+  function sendByEmail(data){
       var body=['Name: '+data.name,'Email: '+data.email,'Business: '+data.business,'Type: '+data.type,'Interested in: '+data.interest,'Problem: '+data.problem,'I agree to be emailed about the waitlist and a free demo.'].join('\n');
       var subj='Waitlist request', to='hello@lyrascent.com', q=encodeURIComponent;
       var links=[
@@ -413,8 +421,7 @@ section{padding-block:clamp(72px,11vw,170px)}
       });
       var note=document.createElement('span');note.style.display='block';note.style.marginTop='8px';note.textContent='Or email us directly at hello@lyrascent.com.';
       msg.appendChild(note);
-    }
-  });
+  }
   // ---- demo: recorded replays and protected live chat ----
   // Set DEMO_URL to the Cloudflare Worker address (no trailing slash) to turn on the live chat. Empty = live chat hidden.
   var DEMO_URL='';
