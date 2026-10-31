@@ -154,6 +154,22 @@ section{padding-block:clamp(72px,11vw,170px)}
 .big-wm .dot{fill:var(--blue)}
 .legal{margin-top:36px;color:var(--silver);font-size:15px;display:flex;flex-wrap:wrap;gap:8px 28px}
 
+/* demo chat and replay */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pick button{font:600 15px/1 var(--text);background:var(--navy-3);color:var(--platinum);border:0;padding:12px 16px;cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--blue);color:#fff}
+#chat-log{margin-top:8px;min-height:140px;max-height:380px;overflow:auto;padding-right:4px}
+#chat-form{display:flex;gap:10px;margin-top:16px}
+#chat-input{flex:1;min-width:0;font:400 17px/1.3 var(--text);padding:14px 16px;border:0;background:var(--navy-3);color:var(--platinum);border-radius:0}
+#chat-input::placeholder{color:var(--silver)}
+#chat-input:focus{outline:3px solid var(--ice);outline-offset:0}
+#chat-form .btn[disabled],#chat-input[disabled]{opacity:.6;cursor:not-allowed}
+.msg p+p{margin-top:8px}
+.msg .urgent{display:inline-block;margin-top:8px;background:var(--navy);color:var(--ice);padding:4px 10px;font-size:13.5px;border-radius:99px}
+.replay-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px}
+.replay-bar .btn{font-size:15px}
+
 /* motion */
 .js .rise{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .js .rise.in{opacity:1;transform:none}
@@ -239,33 +255,38 @@ section{padding-block:clamp(72px,11vw,170px)}
 
 <section id="see" class="live wrap" aria-labelledby="h-live">
   <h2 id="h-live" class="rise">See how it answers for your trade.</h2>
-  <p class="lead rise">Pick a trade. These are examples of the tone and detail we set up. Yours is trained on your own services and prices.</p>
+  <p class="lead rise">These are made-up businesses. Try the live assistant, or watch recordings of the real thing. Yours would be set up with your own services, hours and prices.</p>
   <div class="live-grid">
     <div class="tabs" role="tablist" aria-label="Business type" id="tabs"></div>
     <div id="demos">
+            <article class="demo" data-name="Try it live" id="live-demo">
+        <h3>Try it live</h3>
+        <div data-ui>
+          <p class="frag-note" style="margin-top:0">Chat with a sample assistant for a made-up business. Please do not type real personal details. Replies are written by an AI and can be imperfect.</p>
+          <div class="pick" role="group" aria-label="Choose a sample business">
+            <button type="button" data-sample="cleaning" aria-pressed="true">House cleaning</button>
+            <button type="button" data-sample="hvac" aria-pressed="false">Heating and air</button>
+          </div>
+          <div id="chat-log" role="log" aria-live="polite" aria-label="Conversation with the sample assistant"></div>
+          <form id="chat-form" novalidate>
+            <label for="chat-input" class="sr">Your message</label>
+            <input id="chat-input" maxlength="300" autocomplete="off" placeholder="Type a question a customer might ask">
+            <button class="btn sm" type="submit">Send</button>
+          </form>
+          <p class="frag-note" id="chat-status" role="status" aria-live="polite"></p>
+        </div>
+      </article>
       <article class="demo" data-name="House cleaning">
-        <h3>House cleaning</h3>
-        <div data-ui>
-          <p class="who">Visitor</p><div class="msg v">How much for a 3-bedroom deep clean, and do you bring your own supplies?</div>
-          <p class="who r">Assistant</p><div class="msg a">We bring all supplies and equipment. Deep cleans are quoted by home size, so I'll note 3 bedrooms and ask two quick questions about bathrooms and pets. Then the owner sends your exact quote today.</div>
-          <div class="chips"><span class="chip">Lead captured</span><span class="chip">Quote request sent to the owner</span></div>
-        </div>
+        <h3>Recorded: house cleaning</h3>
+        <div data-ui class="replay" data-rec="cleaning"></div>
       </article>
-      <article class="demo" data-name="Auto detailing">
-        <h3>Auto detailing</h3>
-        <div data-ui>
-          <p class="who">Visitor</p><div class="msg v">Can you remove pet hair from the back seat? I have an SUV.</div>
-          <p class="who r">Assistant</p><div class="msg a">Yes, pet hair removal is part of our interior detail for SUVs. I can request a Saturday morning slot for you. What's the year and model, and the best number to confirm?</div>
-          <div class="chips"><span class="chip">Vehicle noted</span><span class="chip">Appointment request sent</span><span class="chip">Reminder scheduled</span></div>
-        </div>
+      <article class="demo" data-name="Heating and air">
+        <h3>Recorded: heating and air</h3>
+        <div data-ui class="replay" data-rec="hvac"></div>
       </article>
-      <article class="demo" data-name="Landscaping">
-        <h3>Landscaping</h3>
-        <div data-ui>
-          <p class="who">Visitor</p><div class="msg v">We need weekly lawn mowing for a quarter-acre lot. Are you taking new customers?</div>
-          <p class="who r">Assistant</p><div class="msg a">We are taking new weekly customers in your area. I'll pass your address to the owner for a quick site check and quote. Do you prefer a call or an email?</div>
-          <div class="chips"><span class="chip">Service area checked</span><span class="chip">Lead captured</span><span class="chip">Follow-up email queued</span></div>
-        </div>
+      <article class="demo" data-name="Safety question">
+        <h3>Recorded: a safety question</h3>
+        <div data-ui class="replay" data-rec="safety"></div>
       </article>
     </div>
   </div>
@@ -359,6 +380,7 @@ section{padding-block:clamp(72px,11vw,170px)}
 
 </main>
 
+<script type="application/json" id="rec-data">[{"id": "cleaning", "title": "House cleaning (sample business)", "turns": [{"who": "visitor", "text": "Hi, do you do move-out cleans? Could someone come Thursday morning?"}, {"who": "assistant", "text": "Yes, we offer move-out cleans! I'm an AI assistant, and I can take your booking request. The owner confirms all appointment times.\n\nTo start, what's your name, and what's the best phone number or email to reach you? Also, what's your ZIP code? We only serve 95828 and 95829."}, {"who": "visitor", "text": "I'm in 95828. Roughly how much for a 2 bedroom?"}, {"who": "assistant", "text": "I'm sorry, I can't share prices. The owner will send you an exact quote. Your ZIP code, 95828, is in our service area, so I can take your request.\n\nWhat's your name, and what's the best phone number or email for the owner to reach you?"}, {"who": "visitor", "text": "Ok, please request Thursday at 9. I'm Dana, dana@example.com"}, {"who": "assistant", "text": "Thanks, Dana! I've noted a move-out clean request for Thursday at 9 am in ZIP 95828, with dana@example.com as your contact. The owner will confirm the time and send your exact quote.\n\nIs there anything else you'd like included in your notes, like access details or the number of bathrooms?"}]}, {"id": "hvac", "title": "Heating and air (sample business)", "turns": [{"who": "visitor", "text": "My AC stopped blowing cold air and it's hot. Can someone come today?"}, {"who": "assistant", "text": "I'm sorry your AC is out, that's uncomfortable. I'm an AI assistant, and I can take a request for you. I can't confirm a same-day visit, but the owner or dispatcher will confirm the time.\n\nTo start, what is your name, and what is the best phone number or email to reach you?"}, {"who": "visitor", "text": "How much is a service call?"}, {"who": "assistant", "text": "I'm sorry, I can't share prices or service call fees. The owner will send you an exact quote. I can take your request so they can reach you.\n\nWhat is your name, and what's the best phone number or email to reach you?"}, {"who": "visitor", "text": "I'm in 95829, it's a central AC. I'm Sam, sam@example.com"}, {"who": "assistant", "text": "Thanks, Sam. Your ZIP code 95829 is in our service area, so I can pass this along.\n\nQuick question: is the AC not cooling at all, and is anyone in the home unwell or overheating? If so, please call 911 or your local emergency number first. Also, what day and time work best for you?"}]}, {"id": "safety", "title": "Safety question (sample business)", "turns": [{"who": "visitor", "text": "I smell gas near my furnace, what should I do?"}, {"who": "assistant", "text": "Please leave your home right away and call 911 or your gas company from outside. Don't use light switches, phones, or appliances inside the home. Once you're safe, I'll pass this to the owner as urgent. Could you share your name and a phone number where you can be reached?\n\n[URGENT]"}]}]</script>
 <script>
 (function(){
   var root=document.documentElement; root.classList.add('js');
@@ -393,6 +415,91 @@ section{padding-block:clamp(72px,11vw,170px)}
       msg.appendChild(note);
     }
   });
+  // ---- demo: recorded replays and protected live chat ----
+  // Set DEMO_URL to the Cloudflare Worker address (no trailing slash) to turn on the live chat. Empty = live chat hidden.
+  var DEMO_URL='';
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function msgBlock(log,who,text){
+    var lab=document.createElement('p');lab.className='who'+(who==='assistant'?' r':'');lab.textContent=who==='assistant'?'Assistant':'Visitor';
+    var box=document.createElement('div');box.className='msg '+(who==='assistant'?'a':'v');
+    var urgent=/\[URGENT\]/.test(text);
+    text.replace(/\s*\[URGENT\]\s*/g,'').split(/\n\s*\n/).forEach(function(par){
+      if(!par.trim())return;var p=document.createElement('p');p.textContent=par.trim();box.appendChild(p);
+    });
+    if(urgent){var u=document.createElement('span');u.className='urgent';u.textContent='Marked urgent for the owner';box.appendChild(u)}
+    log.appendChild(lab);log.appendChild(box);
+    return box;
+  }
+  var recData=[];
+  try{recData=JSON.parse(document.getElementById('rec-data').textContent)}catch(e){}
+  [].forEach.call(document.querySelectorAll('.replay'),function(el){
+    var rec=recData.filter(function(r){return r.id===el.getAttribute('data-rec')})[0];
+    if(!rec)return;
+    var log=document.createElement('div');el.appendChild(log);
+    var bar=document.createElement('div');bar.className='replay-bar';
+    var btn=document.createElement('button');btn.type='button';btn.className='btn sm';btn.textContent='Replay';
+    var note=document.createElement('span');note.className='frag-note';note.style.margin='0';
+    note.textContent='Recorded from the real assistant. The business is made up.';
+    bar.appendChild(btn);bar.appendChild(note);el.appendChild(bar);
+    var timers=[];
+    function showAll(){timers.forEach(clearTimeout);timers=[];log.textContent='';rec.turns.forEach(function(t){msgBlock(log,t.who,t.text)})}
+    function play(){
+      timers.forEach(clearTimeout);timers=[];log.textContent='';
+      if(reduced){showAll();return}
+      rec.turns.forEach(function(t,i){timers.push(setTimeout(function(){msgBlock(log,t.who,t.text)},i*1100))});
+    }
+    btn.addEventListener('click',play);
+    showAll();
+  });
+
+  var liveEl=document.getElementById('live-demo');
+  if(!DEMO_URL){ if(liveEl)liveEl.parentNode.removeChild(liveEl); }
+  else if(liveEl){
+    var sample='cleaning',history=[],busy=false,MAXTURNS=6;
+    var clog=document.getElementById('chat-log'),cform=document.getElementById('chat-form'),cin=document.getElementById('chat-input'),cstat=document.getElementById('chat-status');
+    var cbtn=cform.querySelector('button');
+    function reset(){
+      history=[];clog.textContent='';cstat.textContent='';cin.disabled=false;cbtn.disabled=false;
+      msgBlock(clog,'assistant',sample==='hvac'?'Hi! I am an AI assistant for Sample Comfort Heating and Air, a made-up business. Ask me anything a customer might ask.':'Hi! I am an AI assistant for Sample Sparkle Cleaning, a made-up business. Ask me anything a customer might ask.');
+    }
+    [].forEach.call(liveEl.querySelectorAll('.pick button'),function(b){
+      b.addEventListener('click',function(){
+        sample=b.getAttribute('data-sample');
+        [].forEach.call(liveEl.querySelectorAll('.pick button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+        reset();
+      });
+    });
+    function finish(msg){cstat.textContent=msg;cin.disabled=true;cbtn.disabled=true}
+    cform.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(busy)return;
+      var text=cin.value.trim();
+      if(!text)return;
+      if(text.length>300){cstat.textContent='Please keep your message under 300 characters.';return}
+      busy=true;cbtn.disabled=true;cin.value='';
+      history.push({role:'user',content:text});
+      msgBlock(clog,'visitor',text);
+      cstat.textContent='The assistant is typing...';
+      clog.scrollTop=clog.scrollHeight;
+      fetch(DEMO_URL+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample:sample,messages:history})})
+        .then(function(r){return r.json().then(function(j){return{status:r.status,body:j}})})
+        .then(function(res){
+          busy=false;cbtn.disabled=false;
+          if(res.status===200&&res.body.reply){
+            history.push({role:'assistant',content:res.body.reply});
+            msgBlock(clog,'assistant',res.body.reply);
+            cstat.textContent='';
+            if(history.length>=MAXTURNS*2){finish('That is the end of this demo chat. Join the waitlist below and we will set one up for your business.')}
+          }else{
+            history.pop();
+            finish(res.body&&res.body.message?res.body.message:'The live demo is not available right now. Please see the recorded examples.');
+          }
+          clog.scrollTop=clog.scrollHeight;
+        })
+        .catch(function(){history.pop();busy=false;cbtn.disabled=false;cstat.textContent='The live demo could not connect. Please try again, or see the recorded examples.'});
+    });
+    reset();
+  }
   // tabs
   var demos=[].slice.call(document.querySelectorAll('.demo'));
   var tabs=document.getElementById('tabs');
