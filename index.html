@@ -431,7 +431,7 @@ section{padding-block:clamp(72px,11vw,170px)}
   }
   // ---- demo: recorded replays and protected live chat ----
   // Set DEMO_URL to the Cloudflare Worker address (no trailing slash) to turn on the live chat. Empty = live chat hidden.
-  var DEMO_URL='';
+  var DEMO_URL='https://lyrascent-demo.ngllarry.workers.dev';
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function msgBlock(log,who,text){
     var lab=document.createElement('p');lab.className='who'+(who==='assistant'?' r':'');lab.textContent=who==='assistant'?'Assistant':'Visitor';
