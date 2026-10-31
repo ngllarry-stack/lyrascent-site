@@ -378,8 +378,19 @@ section{padding-block:clamp(72px,11vw,170px)}
         .catch(function(){msg.textContent='Something went wrong. Please email hello@lyrascent.com.'});
     }else{
       var body=['Name: '+data.name,'Email: '+data.email,'Business: '+data.business,'Type: '+data.type,'Interested in: '+data.interest,'Problem: '+data.problem,'I agree to be emailed about the waitlist and a free demo.'].join('\n');
-      window.location.href='mailto:hello@lyrascent.com?subject='+encodeURIComponent('Waitlist request')+'&body='+encodeURIComponent(body);
-      msg.textContent='Your email app should open with your request. Press send to join.';
+      var subj='Waitlist request', to='hello@lyrascent.com', q=encodeURIComponent;
+      var links=[
+        ['Gmail','https://mail.google.com/mail/?view=cm&fs=1&to='+to+'&su='+q(subj)+'&body='+q(body)],
+        ['Outlook','https://outlook.live.com/mail/0/deeplink/compose?to='+to+'&subject='+q(subj)+'&body='+q(body)],
+        ['Your email app','mailto:'+to+'?subject='+q(subj)+'&body='+q(body)]
+      ];
+      msg.textContent='Almost done. Choose where to send your request from, then press send: ';
+      links.forEach(function(l,i){
+        var a=document.createElement('a');a.href=l[1];a.textContent=l[0];a.target='_blank';a.rel='noopener';a.style.marginRight='16px';a.style.color='inherit';
+        msg.appendChild(a);
+      });
+      var note=document.createElement('span');note.style.display='block';note.style.marginTop='8px';note.textContent='Or email us directly at hello@lyrascent.com.';
+      msg.appendChild(note);
     }
   });
   // tabs
