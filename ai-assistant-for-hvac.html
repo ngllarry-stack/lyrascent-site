@@ -43,8 +43,6 @@ h3{font-size:var(--s-lead);letter-spacing:-.02em;line-height:1.15}
 .light{background:var(--mist);color:var(--ink)}
 .mid{background:var(--platinum);color:var(--ink)}
 section{position:relative;padding-block:clamp(72px,10vw,150px);scroll-margin-top:16px}
-/* the folder tab: every section is the next file in the stack */
-.tabbed::before{content:"";position:absolute;top:-39px;left:min(var(--tx,var(--gutter)),calc(100% - clamp(150px,18vw,260px) - var(--gutter)));width:clamp(150px,18vw,260px);height:40px;background:inherit;clip-path:var(--tab)}
 
 .preview{background:var(--blue);color:#fff;text-align:center;padding:10px var(--gutter);font:600 var(--s-small)/1.35 var(--font)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px var(--gutter);background:var(--navy);color:var(--platinum)}
@@ -54,11 +52,10 @@ section{position:relative;padding-block:clamp(72px,10vw,150px);scroll-margin-top
 @media(max-width:820px){.nav .links a.plain{display:none}}
 .wm{display:block;width:clamp(128px,14vw,176px);aspect-ratio:528/94;height:auto;color:var(--platinum)}
 
-/* buttons: the folder tab again */
-.btn{display:inline-block;background:var(--blue);color:#fff;font:600 17px/1 var(--font);padding:18px 30px;text-decoration:none;border:0;cursor:pointer;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 100%,0 100%);transition:transform .15s ease,background-color .15s ease}
+.btn{display:inline-block;background:var(--blue);color:#fff;font:600 17px/1 var(--font);padding:18px 30px;text-decoration:none;border:0;border-radius:99px;cursor:pointer;transition:transform .15s ease,background-color .15s ease}
 .btn:hover{background:var(--blue-2);transform:translateY(-2px)}
 .btn:active{transform:translateY(0)}
-.btn:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .btn.sm{padding:13px 22px;font-size:16px}
 .btn.on-light{background:var(--navy)}
 .btn.on-light:hover{background:var(--navy-3)}
@@ -79,18 +76,13 @@ section{position:relative;padding-block:clamp(72px,10vw,150px);scroll-margin-top
 /* the folder stack: tabs are the real controls */
 .folders{margin-top:clamp(32px,4vw,56px);padding-inline:var(--gutter)}
 .tabs{display:flex;padding-left:4px}
-.tabs button,.tab-label{font:600 16px/1.15 var(--font);color:var(--platinum);background:var(--navy-3);border:0;padding:15px 38px 13px;margin-right:-14px;clip-path:var(--tab);position:relative;cursor:pointer;transition:background-color .15s ease}
+.tabs button,.tab-label{font:600 16px/1.15 var(--font);color:var(--platinum);background:var(--navy-3);border:0;padding:13px 22px;margin-right:6px;border-radius:99px 99px 0 0;position:relative;cursor:pointer;transition:background-color .15s ease}
 .tabs button:hover{background:#26366f}
 .tabs button[aria-selected="true"],.tab-label{background:var(--blue);color:#fff;z-index:2}
 .tab-label{cursor:default}
-.tabs button:focus-visible{outline:3px solid #fff;outline-offset:-7px}
-@media(max-width:700px){.tabs{display:grid;grid-template-columns:repeat(4,1fr);padding:0}.tabs button{--tab:polygon(9px 0,calc(100% - 9px) 0,100% 100%,0 100%);padding:12px 12px 10px;margin:0 -3px;font-size:14px}}
+.tabs button:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+@media(max-width:700px){.tabs{display:grid;grid-template-columns:repeat(4,1fr);padding:0}.tabs button{padding:12px 10px 10px;margin:0 2px;font-size:14px}}
 .front{background:var(--blue);padding:clamp(12px,2.2vw,32px);padding-bottom:clamp(56px,6vw,88px)}
-.js .demo[hidden]{display:none}
-.demo h2{font-size:var(--s-body);letter-spacing:0;color:#fff;margin-bottom:8px;max-width:none}
-.js .demo h2{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.demo+.demo{margin-top:24px}
-.js .demo+.demo{margin-top:0}
 .demo-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:960px){.demo-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
 .chatbox{background:var(--navy);color:var(--platinum);padding:clamp(16px,2.2vw,28px);font-size:16px;min-width:0}
@@ -145,35 +137,6 @@ section{position:relative;padding-block:clamp(72px,10vw,150px);scroll-margin-top
 .stage:nth-child(4)>div{background:var(--ice);color:var(--ink)}
 @media(min-width:860px){.stages{grid-template-columns:2.6fr 3.2fr 2.6fr 3.2fr}}
 
-/* close-ups on a board */
-.handles-board{--tx:var(--gutter);background:var(--navy);color:var(--platinum)}
-.board{display:grid;grid-template-columns:1fr;gap:8px}
-.tile{position:relative;overflow:hidden;background:var(--navy-2);color:var(--platinum);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;min-height:220px}
-.tile h3{font-size:var(--s-body);font-weight:650;letter-spacing:-.01em;line-height:1.25;position:relative}
-.tile p{font-size:16px;line-height:1.35;margin-top:2px;position:relative;max-width:46ch}
-.tile.t-head{background:var(--blue);color:#fff;justify-content:flex-start}
-.tile.t-head h2{color:#fff}
-.tile.t-lang,.tile.t-quote{background:var(--platinum);color:var(--ink)}
-.tile.t-ai{background:var(--blue);color:#fff}
-.tile.t-btn,.tile.t-urgent,.tile.t-hours{background:var(--navy-3)}
-.tile [data-ui]{position:absolute}
-.ui-btn{top:22px;left:20px;background:#fff;color:var(--blue-2);font-weight:650;font-size:clamp(26px,3vw,40px);line-height:1;padding:.55em .7em;white-space:nowrap;border-radius:10px}
-.ui-lang{top:-14px;right:-8px;left:20px;list-style:none;padding:0;font-size:clamp(28px,3.1vw,42px);font-weight:600;line-height:1.28;letter-spacing:-.02em}
-.ui-lang li{padding:.04em .3em;color:var(--ink-soft)}
-.ui-lang li.on{background:var(--navy);color:#fff}
-.ui-chip{top:30px;left:20px;background:#B3261E;color:#fff;font-weight:650;font-size:clamp(30px,3.2vw,44px);line-height:1;padding:.5em .7em;border-radius:99px;white-space:nowrap}
-.ui-bub{top:26px;left:20px;right:-30px;background:#fff;color:var(--ink);font-size:clamp(26px,2.6vw,36px);font-weight:600;line-height:1.14;letter-spacing:-.02em;padding:.6em .7em;border-radius:6px 26px 26px 26px}
-.ui-big{top:10px;left:20px;font-size:clamp(58px,6vw,84px);font-weight:650;letter-spacing:-.04em;line-height:1;white-space:nowrap;color:var(--ice);font-variant-numeric:tabular-nums}
-.ui-quote{top:22px;left:20px;background:var(--blue);color:#fff;font-size:clamp(22px,2.1vw,30px);font-weight:600;letter-spacing:-.02em;line-height:1.14;padding:.55em .8em;white-space:nowrap;border-radius:22px 6px 22px 22px}
-@media(min-width:900px){
-  .board{grid-template-columns:repeat(12,1fr);grid-auto-rows:104px}
-  .tile{min-height:0}
-  .t62{grid-column:span 6;grid-row:span 2}.t64{grid-column:span 6;grid-row:span 4}
-  .t34{grid-column:span 3;grid-row:span 4}.t32{grid-column:span 3;grid-row:span 2}
-}
-@media(min-width:900px) and (max-width:1200px){.ui-btn{font-size:24px}.ui-quote{font-size:19px}}
-@media(max-width:899px){.ui-btn{right:20px;white-space:normal;font-size:19px;text-align:center}.ui-quote{right:20px;white-space:normal;font-size:19px}.tile.t-lang{min-height:360px}.tile.t-head{min-height:0;padding-block:28px}.tile.t-ai,.tile.t-urgent{min-height:250px}}
-
 /* trades */
 .trades{--tx:38%}
 .marks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -198,14 +161,6 @@ a.mark:hover{background:var(--navy);color:#fff}
 @media(min-width:760px){.marks.three{grid-template-columns:repeat(3,1fr)}}
 .nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:5px}
 
-.mark.pic{justify-content:flex-start;gap:10px;overflow:hidden}
-.mark.pic img{display:block;width:calc(100% + 44px);max-width:none;height:auto;aspect-ratio:16/9;object-fit:cover;margin:-22px -22px 8px}
-@media(max-width:640px){
-  .mark.pic{display:grid;grid-template-columns:96px 1fr;gap:2px 14px;align-items:center;padding:0 14px 0 0}
-  .mark.pic img{grid-row:span 2;width:96px;height:100%;min-height:96px;aspect-ratio:auto;margin:0}
-  .mark.pic b{align-self:end;padding-top:12px}
-  .mark.pic span{align-self:start;padding-bottom:12px}
-}
 
 /* you stay in control: a working switch */
 .control{--tx:70%;background:var(--blue);color:#fff;overflow:hidden;transition:background-color .25s ease;padding-block:clamp(72px,8vw,120px)}
@@ -300,7 +255,6 @@ a.mark:hover{background:var(--navy);color:#fff}
 .close .row{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin-top:28px}
 .close .row a.mail{font-size:var(--s-body)}
 .folder-form{margin-top:0}
-.form-tab{display:block;width:clamp(150px,18vw,260px);height:40px;margin-left:4px;margin-bottom:-1px;background:var(--blue);clip-path:var(--tab)}
 .form-body{background:var(--blue);color:#fff;padding:clamp(20px,3.4vw,48px);display:grid;grid-template-columns:1fr;gap:28px clamp(32px,5vw,72px)}
 @media(min-width:960px){.form-body{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
 .form-body .mail{color:#fff}
@@ -326,23 +280,176 @@ a.mark:hover{background:var(--navy);color:#fff}
 .foot-cols a:hover{text-decoration:underline;text-underline-offset:4px}
 .legal{margin-top:clamp(28px,4vw,48px);color:var(--silver);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 28px}
 
+/* the cube: scrolling rolls it through one request, the arrows turn it to your trade */
+.home{background:var(--navy)}
+.home .nav{position:sticky;top:0;z-index:30}
+.cube-scene{--navh:66px;--cube:min(calc(100vh - 196px),44vw,720px);position:relative;background:var(--navy);color:#fff;margin-top:calc(var(--navh) * -1);padding-block:0}
+.cube-anchor{position:absolute;left:0;top:calc((100% - 100vh) * var(--at,0))}
+@supports(height:100svh){.cube-scene{--cube:min(calc(100svh - 196px),44vw,720px)}}
+.js:not(.still) .cube-scene{height:460vh}
+.cube-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden; /* taste-skill-ignore: fallback for older phones */ display:flex;align-items:center;justify-content:center;padding-top:var(--navh)}
+.cube-word{position:absolute;left:0;right:0;bottom:-.13em;text-align:center;font-weight:680;letter-spacing:-.045em;line-height:1;white-space:nowrap;color:var(--navy-3);font-size:min(24vw,calc(150vw / var(--len,9)));user-select:none;pointer-events:none}
+.cube-glow{position:absolute;width:calc(var(--cube) * 1.02);height:calc(var(--cube) * 1.02);background:var(--blue);filter:blur(70px);opacity:.5;pointer-events:none;margin-top:var(--navh)}
+.cube-view{position:relative;flex:none;width:var(--cube);height:var(--cube);perspective:3400px;touch-action:pan-y}
+.cube-turn,.cube{position:absolute;inset:0;transform-style:preserve-3d}
+.cube-turn{transform:translateZ(calc(var(--cube) / -2))}
+.face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;background:var(--navy-2);color:#fff}
+.face[data-step="0"]{transform:translateZ(calc(var(--cube) / 2))}
+.face[data-step="1"]{transform:rotateX(-90deg) translateZ(calc(var(--cube) / 2))}
+.face[data-step="2"]{transform:rotateX(-180deg) translateZ(calc(var(--cube) / 2))}
+.face[data-step="3"]{transform:rotateX(-270deg) translateZ(calc(var(--cube) / 2))}
+.face[data-step="4"]{transform:rotateX(-360deg) translateZ(calc(var(--cube) / 2))}
+.face[data-step="5"]{transform:rotateX(-450deg) translateZ(calc(var(--cube) / 2))}
+.face.off{opacity:0;pointer-events:none}
+.f-side{visibility:hidden}
+.f-side.on{visibility:visible}
+.face h1,.face .fh{font-size:clamp(29px,3.5vw,52px);letter-spacing:-.035em;line-height:1.02;font-weight:650;color:#fff;text-wrap:balance}
+.face h2{font-size:clamp(25px,2.6vw,38px);letter-spacing:-.03em;line-height:1.05;max-width:none;text-wrap:balance}
+/* first face: the picture, then what this is */
+.f-title{background:#0C1538;text-align:center;justify-content:flex-end}
+.f-title img{position:absolute;top:0;left:0;width:100%;height:80%;object-fit:cover;object-position:50% 10%}
+/* taste-skill-ignore: the one allowed scrim, under text on a picture */
+.f-title .shade{position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.62) 34%)} /* taste-skill-ignore */
+.f-copy{position:relative;padding:0 clamp(16px,2.4vw,36px) clamp(16px,2.2vw,32px);display:grid;gap:clamp(8px,1vw,14px);justify-items:center}
+.f-copy p{font-size:clamp(16px,1.25vw,18px);line-height:1.4;max-width:50ch}
+.f-acts{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:center;font-size:16px}
+.f-acts a:not(.btn){color:#fff;text-underline-offset:4px}
+/* second face: the conversation */
+.f-chat{gap:clamp(8px,1vw,14px)}
+.f-chat h2,.f-chat .msg{margin-inline:clamp(16px,2.2vw,32px)}
+.f-chat h2{margin-top:clamp(16px,2.2vw,32px)}
+.f-chat .msg{font-size:clamp(16px,1.3vw,19px);margin-block:0;max-width:calc(100% - 2 * clamp(16px,2.2vw,32px));line-height:1.32}
+.f-chat .msg.a{align-self:flex-end;margin-left:0}
+.f-chat .msg.v{background:var(--navy-3);align-self:flex-start;margin-right:0}
+.f-chat .band{flex:1;min-height:0;width:100%;object-fit:cover;object-position:50% 34%;margin-top:clamp(4px,.6vw,10px)}
+.f-chat .frag-note{position:absolute;left:0;bottom:0;margin:0;padding:6px clamp(16px,2.2vw,32px);font-size:14px;color:var(--platinum);background:var(--navy-2)}
+/* third face: the email */
+.f-mail{background:var(--platinum);color:var(--ink);padding:clamp(16px,2.2vw,32px);gap:clamp(8px,1.2vw,18px)}
+.f-mail h2{color:var(--ink)}
+.f-mail .slip{flex:1;display:flex;flex-direction:column;overflow:hidden;font-size:clamp(15px,1.25vw,18px)}
+.f-mail .slip-head{font-size:clamp(16px,1.5vw,22px)}
+.f-mail .slip dt{font-size:inherit}
+.f-mail .slip .frag-note{margin-top:auto;padding-top:8px;font-size:14px}
+.f-mail .slip dl{margin-top:clamp(8px,1vw,14px)}
+.f-mail .slip .sum{margin-top:clamp(8px,1vw,14px)}
+.f-mail .slip .sum b{font-size:inherit}
+/* what it does */
+.f-does{background:var(--blue);padding:clamp(16px,2.2vw,32px);display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:clamp(8px,1.2vw,18px) clamp(14px,2vw,28px);align-items:start}
+.f-does h3{font-size:clamp(17px,1.5vw,22px);line-height:1.12}
+.f-does p{font-size:clamp(15px,1.15vw,17px);line-height:1.3;margin-top:4px}
+@media(max-width:899px){.f-does{display:flex;gap:7px;justify-content:space-between}.f-does h2{font-size:24px}.f-does h3{font-size:16px}.f-does p{font-size:14px;margin-top:0}}
+/* how a business gets its bubble */
+.f-video{background:var(--navy-2)}
+.f-video video,.f-video .poster{order:1;flex:1;min-height:0;width:100%;object-fit:cover;object-position:50% 20%;background:#0B1540}
+.f-video h2{order:0;padding:clamp(12px,1.5vw,20px) clamp(84px,8vw,110px) clamp(10px,1.2vw,16px) clamp(16px,2.2vw,32px);font-size:clamp(20px,1.8vw,26px)}
+.setup-steps{order:2;list-style:none;padding:0;margin:0}
+.setup-steps li{display:none;background:var(--blue);color:#fff;padding:12px clamp(16px,2.2vw,32px);font-size:clamp(16px,1.4vw,20px);font-weight:600;line-height:1.25}
+.setup-steps li.on{display:block}
+.video-btn{position:absolute;top:clamp(12px,1.6vw,22px);right:clamp(12px,1.6vw,22px);z-index:2;background:var(--navy-3);color:#fff;border:0;border-radius:99px;font:600 15px/1 var(--font);padding:11px 16px;cursor:pointer}
+.video-btn:hover{background:var(--blue)}
+/* try it, live, on the last side */
+.f-live{padding:clamp(14px,2vw,28px);gap:clamp(6px,.8vw,10px);background:var(--navy-2)}
+.f-live h2{font-size:clamp(24px,2.4vw,34px)}
+.f-live .frag-note{margin:0;font-size:14px;line-height:1.3;color:var(--platinum)}
+.f-live .pick{margin:0}
+.f-live .pick button{padding:10px 14px}
+.f-live #chat-log{flex:1;min-height:0;max-height:none;margin:0;padding-right:4px}
+.f-live #chat-log .msg{font-size:16px;margin-top:6px;padding:9px 13px}
+.f-live #chat-log .who{display:none}
+.f-live #chat-form{margin:0}
+.f-live #chat-input{padding:11px 13px;font-size:16px}
+.f-live #chat-status:empty{display:none}
+.ask-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ask-chips button{font:500 15px/1.15 var(--font);background:var(--navy-3);color:#fff;border:0;border-radius:99px;padding:9px 13px;cursor:pointer;transition:background-color .15s ease}
+.ask-chips button:hover{background:var(--blue)}
+/* controls */
+.turn{position:absolute;top:calc(50% + var(--navh) / 2);width:68px;height:68px;margin-top:-34px;border:0;border-radius:50%;background:var(--navy-3);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .15s ease,transform .15s ease;z-index:3}
+.turn svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.turn span{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;font:500 15px/1 var(--font);color:var(--platinum)}
+.turn:hover{background:var(--blue);transform:scale(1.07)}
+.turn:active{transform:scale(.96)}
+.turn.prev{left:calc(50% - var(--cube) / 2 - 104px)}
+.turn.next{right:calc(50% - var(--cube) / 2 - 104px)}
+.cube-dots{position:absolute;left:var(--gutter);top:calc(50% + var(--navh) / 2);transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:3}
+.cube-dots button{width:24px;height:24px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff}
+.cube-dots button i{display:block;width:11px;height:11px;border-radius:99px;background:var(--silver);transition:height .2s ease,background-color .2s ease}
+.cube-dots button[aria-current="step"] i{background:#fff;height:26px}
+.cube-dots button[aria-current="step"]{height:34px}
+.cube-dots svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cube-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:899px){
+  .cube-scene{--navh:60px;--cube:min(92vw,calc(100vh - 250px))}
+  .cube-stage{flex-direction:column;justify-content:center;gap:0;padding-bottom:124px}
+  .turn{top:calc(50% - 32px + var(--cube) / 2 + 12px);margin:0;width:56px;height:56px}
+  .turn span{display:none}
+  .turn.prev{left:calc(50% - 64px)}
+  .turn.next{right:calc(50% - 64px)}
+  .cube-dots{left:auto;right:var(--gutter);top:auto;bottom:88px;flex-direction:row;display:none}
+  .cube-glow{filter:blur(44px)}
+  .cube-word{bottom:-.08em;font-size:min(20vw,calc(120vw / var(--len,9)))}
+}
+/* a tablet has a big square, so the words stay big */
+@media(min-width:561px) and (max-width:899px){
+  .face .fh{font-size:46px}
+  .face h2{font-size:36px}
+  .f-copy p,.f-chat .msg,.f-mail .slip{font-size:18px}
+  .f-mail .slip-head{font-size:21px}
+  .f-does h3{font-size:21px}
+  .f-does p{font-size:17px}
+  .f-does h2{font-size:36px}
+  .setup-steps li{font-size:19px}
+}
+/* a phone has a small square, so each side says it more tightly */
+@media(max-width:560px){
+  .f-title img{height:54%;object-position:50% 30%}
+  .f-title .shade{height:66%}
+  .face .fh{font-size:27px}
+  .f-copy{gap:6px;padding-bottom:12px}
+  .f-copy p{font-size:15px;line-height:1.3}
+  .f-mail .slip{padding:12px 14px}
+  .f-mail .wrote{display:none}
+  .ask-chips{display:none}
+}
+@media(max-width:899px) and (min-height:0px){@supports(height:100svh){.cube-scene{--cube:min(92vw,calc(100svh - 250px))}}}
+/* no script, or reduced motion: the same four faces, one under the other */
+html:not(.js) .cube-stage,.still .cube-stage{position:static;height:auto;display:block;padding:calc(var(--navh) + 24px) var(--gutter) 40px;overflow:visible}
+html:not(.js) .cube-view,.still .cube-view{perspective:none;width:100%;height:auto;max-width:720px;margin:auto}
+html:not(.js) .cube-turn,html:not(.js) .cube,.still .cube-turn,.still .cube{position:static;transform:none!important}
+html:not(.js) .face,.still .face{position:relative;transform:none!important;min-height:min(92vw,560px);margin-bottom:8px}
+html:not(.js) .face.off,.still .face.off{opacity:1;pointer-events:auto}
+html:not(.js) .f-side,.still .f-side,html:not(.js) .turn,html:not(.js) .cube-dots,.still .cube-dots,html:not(.js) .cube-glow,.still .cube-glow,html:not(.js) .cube-word,.still .cube-word,html:not(.js) .video-btn{display:none}
+.still .cube-stage{display:grid;grid-template-columns:auto auto 1fr;gap:12px 8px}
+.still .cube-view{grid-column:1/-1;grid-row:2}
+.still .turn{position:static;display:inline-flex;margin:0}
+.still .turn span{display:none}
+html:not(.js) .setup-steps li{display:block}
+html:not(.js) .f-chat .band,.still .f-chat .band{flex:none;height:220px}
+html:not(.js) .f-video video,.still .f-video video{flex:none;height:auto;max-height:420px}
+
+/* what did not fit on the cube: the recorded chats */
+.rec-sec{padding-block:clamp(64px,8vw,120px)}
+.rec-sec h2{color:#fff}
+.rec-grid{display:grid;grid-template-columns:1fr;gap:clamp(20px,2vw,32px) 12px;margin-top:clamp(28px,3vw,44px)}
+@media(min-width:960px){.rec-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.rec-grid h3{margin-bottom:10px;color:#fff}
+.rec-grid .chatbox{background:var(--navy-2)}
+.rec-grid .chatbox>div:first-child{scrollbar-color:var(--navy-3) transparent;scrollbar-width:thin}
+.f-live #chat-log{scrollbar-color:var(--navy-3) transparent;scrollbar-width:thin}
+
 /* motion */
 .js .rise{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
 .js .rise.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rise{opacity:1;transform:none;transition:none}
-  .btn,.tabs button,.mark,.sw,.sw .knob,.control,.qs details{transition:none}
+  .btn,.tabs button,.mark,.sw,.sw .knob,.control,.qs details,.turn,.cube-dots button i{transition:none}
 }
 
 .handles{--tx:62%}
 .with-photo{display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,56px)}
 @media(min-width:1000px){.with-photo{grid-template-columns:minmax(0,8fr) minmax(0,4fr)}}
 .side-photo{display:block;width:100%;height:100%;max-height:640px;min-height:220px;object-fit:cover}
-.credits{--tx:var(--gutter)}
 .table-wrap{margin-top:clamp(24px,3vw,40px);overflow-x:auto}
-.credits table{min-width:760px}
-.credits a{color:#fff}
 .handles h2,.trade h2,.careful h2{max-width:22ch}
 .handles .grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,3.4vw,44px) clamp(32px,6vw,96px);margin-top:clamp(36px,4.4vw,64px)}
 @media(min-width:800px){.handles .grid{grid-template-columns:1fr 1fr}}
@@ -423,7 +530,7 @@ a.mark:hover{background:var(--navy);color:#fff}
     </div></div>
   </div>
 </section>
-<section class="handles light wrap tabbed" aria-labelledby="h-handles">
+<section class="handles light wrap" aria-labelledby="h-handles">
   <div class="with-photo">
   <div>
   <h2 id="h-handles">What it handles for HVAC companies.</h2>
@@ -436,10 +543,10 @@ a.mark:hover{background:var(--navy);color:#fff}
     <div><h3>Every request in your inbox</h3><p>Name, phone or email, what they need and when, in one tidy email, instead of a voicemail you have to decode.</p></div>
   </div>
   </div>
-  <img class="side-photo" src="photo-hvac.jpg" width="570" height="380" alt="Close view of a wall thermostat" loading="lazy">
+  <img class="side-photo" src="art-hvac-1280.webp" width="1280" height="1280" alt="An outdoor air conditioning unit on a navy block" loading="lazy">
   </div>
 </section>
-<section class="careful wrap tabbed" aria-labelledby="h-careful">
+<section class="careful wrap" aria-labelledby="h-careful">
   <h2 id="h-careful">What it never does.</h2>
   <ul>
     <li><b>It does not quote prices.</b>Unless you approve exact wording, it says you will send an exact quote.</li>
@@ -448,7 +555,7 @@ a.mark:hover{background:var(--navy);color:#fff}
     <li><b>It never pretends to be a person.</b>It says it is an AI assistant.</li>
   </ul>
 </section>
-<section class="trade mid wrap tabbed" aria-labelledby="h-faq">
+<section class="trade mid wrap" aria-labelledby="h-faq">
   <h2 id="h-faq">Questions HVAC companies ask.</h2>
   <div class="faq">
     <div><h3>Can it book appointments?</h3><p>It collects the request with a preferred day and time and sends it to you. You confirm. It does not put anything on your calendar by itself.</p></div>
@@ -459,7 +566,7 @@ a.mark:hover{background:var(--navy);color:#fff}
   <p class="fine">You approve what your assistant says before it goes live, and you can switch it off at any time. Not taking orders or payments yet.</p>
   <p class="fine"><a href="missed-inquiry-cost-hvac.html">Guide: what a missed customer inquiry costs an HVAC company</a></p>
 </section>
-<section id="trades" class="trade light wrap tabbed" style="--tx:var(--gutter)" aria-labelledby="h-trades">
+<section id="trades" class="trade light wrap" style="--tx:var(--gutter)" aria-labelledby="h-trades">
   <h2 id="h-trades">Built for other trades too.</h2>
   <ul class="links-list">
     <li><a href="ai-assistant-for-roofing.html">AI assistant for roofing companies</a></li>
@@ -470,7 +577,7 @@ a.mark:hover{background:var(--navy);color:#fff}
     <li><a href="ai-assistant-for-hair-salon.html">AI assistant for hair salons</a></li>
   </ul>
 </section>
-<section id="contact" class="cta-band wrap tabbed" aria-labelledby="h-close">
+<section id="contact" class="cta-band wrap" aria-labelledby="h-close">
   <h2 id="h-close">Join the waitlist for a free HVAC demo.</h2>
   <div class="row">
     <a class="btn" href="/#contact">Join the waitlist</a>
@@ -486,7 +593,7 @@ a.mark:hover{background:var(--navy);color:#fff}
     <div><h2>More trades</h2><ul><li><a href="ai-assistant-for-real-estate.html">Real estate</a></li><li><a href="ai-assistant-for-nail-salon.html">Nail salons</a></li><li><a href="ai-assistant-for-hair-salon.html">Hair salons</a></li><li><a href="missed-inquiry-cost-hvac.html">Guide: cost of a missed inquiry</a></li></ul></div>
     <div><h2>Lyrascent</h2><ul><li><a href="/#contact">Join the waitlist</a></li><li><a href="websites.html">Websites</a></li><li><a href="mailto:hello@lyrascent.com">hello@lyrascent.com</a></li><li><a href="privacy.html">Privacy notice</a></li></ul></div>
   </div>
-  <div class="legal"><span>© 2026 Lyrascent. All rights reserved.</span><span>Sacramento, California</span><a href="photo-credits.html">Photo credits</a></div>
+  <div class="legal"><span>© 2026 Lyrascent. All rights reserved.</span><span>Sacramento, California</span></div>
 </footer>
 <script>
 (function(){
