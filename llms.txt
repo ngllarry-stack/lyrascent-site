@@ -1,6 +1,6 @@
 # Lyrascent Learning
 
-> Lyrascent Learning is a free personal AI tutor for K-12 children: math, reading, science, languages and typing in one place, with hints that teach instead of just giving the answer. Parents apply by email.
+> Lyrascent Learning is a free personal AI tutor for K-12 children: math, reading, science, languages and typing in one place, with hints that teach instead of just giving the answer. Parents sign in with their own Google account at https://app.lyrascent.com. The AI tutor needs the family's own free Google Gemini key; without a key everything else still works.
 
 ## What it does
 - A quick check-in finds where each child is, then a quest map unlocks one skill at a time
@@ -15,5 +15,6 @@ It is not a licensed school and gives no grades, transcripts or accreditation.
 Free for families. No payment is asked for.
 
 ## Contact
-- Email (parents): hello@lyrascent.com to apply for your child
+- Sign in (parents): https://app.lyrascent.com
+- Questions: hello@lyrascent.com
 - Home: https://lyrascent.com/
