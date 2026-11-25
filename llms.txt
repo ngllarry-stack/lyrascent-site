@@ -1,19 +1,19 @@
 # Lyrascent Learning
 
-> Lyrascent Learning is a personal AI tutor for K-12 children: math, reading, science, languages and typing in one place, with hints that teach instead of just giving the answer. It is not open to the public yet; a few families are being invited first.
+> Lyrascent Learning is a free personal AI tutor for K-12 children: math, reading, science, languages and typing in one place, with hints that teach instead of just giving the answer. Parents apply by email.
 
 ## What it does
 - A quick check-in finds where each child is, then a quest map unlocks one skill at a time
 - An AI tutor the child can chat with; the tutor can make mistakes, so parents stay in charge
-- Parents set screen-time limits; no ads
+- Parents set screen-time limits; no ads; free for families, no payment and no card
 - Language practice in Spanish, Chinese, Vietnamese, French and Japanese
 
 ## Not offered
 It is not a licensed school and gives no grades, transcripts or accreditation.
 
 ## Prices
-There are no prices yet.
+Free for families. No payment is asked for.
 
 ## Contact
-- Email (parents): hello@lyrascent.com for early access
+- Email (parents): hello@lyrascent.com to apply for your child
 - Home: https://lyrascent.com/
