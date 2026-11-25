@@ -1,38 +1,19 @@
-# Lyrascent
+# Lyrascent Learning
 
-> Lyrascent builds AI chat assistants and simple, fast websites for local service businesses anywhere in the U.S. Lyrascent is not open for business yet and is not taking payments or orders. Early waitlist members get a free demo built from their own business details.
+> Lyrascent Learning is a personal AI tutor for K-12 children: math, reading, science, languages and typing in one place, with hints that teach instead of just giving the answer. It is not open to the public yet; a few families are being invited first.
 
-## What the chat assistant does
-- Sits as a chat window on the business's own website and answers visitors at any hour, using only facts the business approves
-- Chats in English, Spanish, Vietnamese, Chinese and Tagalog; the owner gets each request in English with a short summary
-- Takes the visitor's details and emails each request to the business owner
-- Learns the business's whole website, and the owner can teach it extra answers and notes on a private page
-- Says it is an AI, does not quote prices or promise times unless the owner approves the wording, and hands off anything it is unsure about
+## What it does
+- A quick check-in finds where each child is, then a quest map unlocks one skill at a time
+- An AI tutor the child can chat with; the tutor can make mistakes, so parents stay in charge
+- Parents set screen-time limits; no ads
+- Language practice in Spanish, Chinese, Vietnamese, French and Japanese
 
 ## Not offered
-Answering phone calls, sending text messages, putting appointments on a calendar by itself, taking payments, or giving legal, medical or safety advice for a business.
+It is not a licensed school and gives no grades, transcripts or accreditation.
 
 ## Prices
 There are no prices yet.
 
-## Who it is for
-Local service businesses, including HVAC companies, roofing companies, solar installers, house cleaning businesses, real estate agents, nail salons and hair salons.
-
 ## Contact
-- Email: hello@lyrascent.com
-- Waitlist and free demo: https://lyrascent.com/#contact
-
-## Key pages
+- Email (parents): hello@lyrascent.com for early access
 - Home: https://lyrascent.com/
-- How it works: https://lyrascent.com/how-it-works.html
-- Websites: https://lyrascent.com/websites.html
-- Questions: https://lyrascent.com/questions.html
-- HVAC: https://lyrascent.com/ai-assistant-for-hvac.html
-- Roofing: https://lyrascent.com/ai-assistant-for-roofing.html
-- Solar: https://lyrascent.com/ai-assistant-for-solar.html
-- House cleaning: https://lyrascent.com/ai-assistant-for-cleaning.html
-- Real estate: https://lyrascent.com/ai-assistant-for-real-estate.html
-- Nail salons: https://lyrascent.com/ai-assistant-for-nail-salon.html
-- Hair salons: https://lyrascent.com/ai-assistant-for-hair-salon.html
-- What a missed inquiry costs an HVAC company: https://lyrascent.com/missed-inquiry-cost-hvac.html
-- Privacy notice: https://lyrascent.com/privacy.html
